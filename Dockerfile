@@ -1,5 +1,6 @@
 FROM nvidia/cuda:10.2-cudnn7-devel
 
+
 # Dependencies
 RUN apt-get update && \
 DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
@@ -17,9 +18,11 @@ RUN wget https://github.com/Kitware/CMake/releases/download/v3.16.0/cmake-3.16.0
 	rm cmake-3.16.0-Linux-x86_64.tar.gz
 ENV PATH="/opt/cmak/e-3.16.0-Linux-x86_64/bin:${PATH}"
 
+
 # OpenPose
 WORKDIR /app
 COPY . /app
+
 
 # Build
 RUN cd ./algorithms_files/openpose && \
@@ -29,10 +32,13 @@ cmake ../ -DBUILD_PYTHON=ON && \
 make -j`nproc` && \
 make install
 
+
 RUN cd /app
+
 
 # expose the port used
 EXPOSE 5001
+
 
 # start the app
 CMD ["python3", "main.py"]

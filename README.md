@@ -15,6 +15,7 @@ You can setup the repository using a docker image by running the following comma
 ```bash
 git clone https://github.com/samuelmyoussef/pose_estimation_gpu.git
 cd pose_estimation_gpu
+bash ./setup.sh
 docker build . -t <image_name:tag>
 ```
 
